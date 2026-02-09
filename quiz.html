@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz (P2)</title>
+
+  <link rel="stylesheet" href="estilos.css">
+
+  <style>
+    .question{
+      margin-top: 10px;
+      font-size: clamp(17px, 2.2vw, 20px);
+      line-height: 1.6;
+    }
+
+    .options{
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    @media (min-width: 720px){
+      .options{ grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Botones de respuesta estilo “tarjeta” */
+    .optBtn{
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: var(--radius-card);
+      text-align: left;
+    }
+
+    .meta{
+      margin-top: 14px;
+    }
+
+    .topActions{
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card center">
+    <h1>Quiz</h1>
+
+    <!-- Texto introductorio del quiz -->
+    <p class="question" id="intro">
+      Acá va el texto que explica que esto es un quiz.
+      Instrucción: selecciona la opción correcta. Si fallas, vuelves a la pregunta 1.
+    </p>
+
+    <!-- Pregunta actual -->
+    <div class="box" style="margin-top:16px;">
+      <p id="qTitle" style="margin:0 0 8px; font-weight:700; opacity:1;"></p>
+      <p id="qText" class="question" style="margin:0;"></p>
+    </div>
+
+    <!-- Opciones -->
+    <div class="options" id="options"></div>
+
+    <!-- Indicador y mensajes -->
+    <p class="hint meta" id="progress"></p>
+    <div id="msgBox" class="msg"></div>
+
+    <!-- Volver al menú (sin desbloquear) -->
+    <div class="topActions">
+      <button class="btn-secondary" id="btnMenu">Volver al menú</button>
+    </div>
+  </main>
+
+  <script>
+    const FLAG = "quiz_p2_ok";
+
+    // =========================================================
+    // Banco de preguntas (placeholders)
+    // - correctIndex: 0..3 indica cuál opción es la correcta
+    // =========================================================
+    const quiz = [
+      {
+        title: "Pregunta 1",
+        text: "Acá va el enunciado de la pregunta 1.",
+        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        correctIndex: 0
+      },
+      {
+        title: "Pregunta 2",
+        text: "Acá va el enunciado de la pregunta 2.",
+        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        correctIndex: 1
+      },
+      {
+        title: "Pregunta 3",
+        text: "Acá va el enunciado de la pregunta 3.",
+        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        correctIndex: 2
+      },
+      {
+        title: "Pregunta 4",
+        text: "Acá va el enunciado de la pregunta 4.",
+        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        correctIndex: 3
+      },
+      {
+        title: "Pregunta 5",
+        text: "Acá va el enunciado de la pregunta 5.",
+        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        correctIndex: 0
+      }
+    ];
+
+    let i = 0; // índice de pregunta actual
+
+    const qTitle = document.getElementById("qTitle");
+    const qText = document.getElementById("qText");
+    const optionsDiv = document.getElementById("options");
+    const progress = document.getElementById("progress");
+    const msgBox = document.getElementById("msgBox");
+
+    function showMsg(type, text){
+      msgBox.className = "msg " + type; // ok | err (usa estilos globales)
+      msgBox.textContent = text;
+    }
+
+    function clearMsg(){
+      msgBox.className = "msg";
+      msgBox.textContent = "";
+    }
+
+    function renderQuestion(){
+      clearMsg();
+
+      const q = quiz[i];
+      qTitle.textContent = q.title;
+      qText.textContent = q.text;
+      progress.textContent = `Pregunta ${i + 1} de ${quiz.length}`;
+
+      optionsDiv.innerHTML = "";
+      q.options.forEach((label, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "optBtn";
+        btn.type = "button";
+        btn.textContent = label;
+
+        btn.addEventListener("click", () => handleAnswer(idx));
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(chosenIndex){
+      const q = quiz[i];
+
+      if (chosenIndex === q.correctIndex){
+        showMsg("ok", "✅ Correcto.");
+
+        // Avanza a la siguiente pregunta (con pequeño delay para que se vea el feedback)
+        setTimeout(() => {
+          i++;
+          if (i >= quiz.length){
+            // Completó todo: desbloquear p3 y volver al menú
+            localStorage.setItem(FLAG, "1");
+            window.location.href = "menu.html";
+          } else {
+            renderQuestion();
+          }
+        }, 450);
+
+      } else {
+        showMsg("err", "❌ Incorrecto. Vuelves a la pregunta 1.");
+
+        // Regresa a pregunta 1
+        setTimeout(() => {
+          i = 0;
+          renderQuestion();
+        }, 650);
+      }
+    }
+
+    document.getElementById("btnMenu").addEventListener("click", () => {
+      window.location.href = "menu.html";
+    });
+
+    // Inicial
+    renderQuestion();
+  </script>
+</body>
+</html>
