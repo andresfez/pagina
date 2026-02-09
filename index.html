@@ -11,7 +11,7 @@
   <main class="card">
     <h1>Bienvenid@</h1>
     <p>
-      Antes de continuar, escribe el texto solicitado. Si está correcto, se habilitará el botón para seguir.
+      Antes de continuar, escriba su primer nombre sin tilde. Si está correcto, se habilitará el botón para seguir.
     </p>
 
     <div class="field">
@@ -36,7 +36,7 @@
     // ================================
     // CONFIG: clave
     // ================================
-    const CLAVE_CORRECTA = "sadhe"; // <-- cámbialo
+    const CLAVE_CORRECTA = "Sadhe"; // <-- cámbialo
 
     // NO importan mayúsculas/minúsculas
     const NORMALIZAR = true;
@@ -63,10 +63,10 @@
       const valor = input.value;
       if (esCorrecto(valor)) {
         btn.disabled = false;
-        mostrarMensaje("ok", "✅ Correcto. Ya puedes continuar.");
+        mostrarMensaje("ok", "Correcto.");
       } else {
         btn.disabled = true;
-        mostrarMensaje("err", "❌ Texto incorrecto. Corrígelo e inténtalo de nuevo.");
+        mostrarMensaje("err", "Texto incorrecto.");
       }
     }
 
