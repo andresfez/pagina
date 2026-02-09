@@ -12,7 +12,7 @@
   /* Colores principales */
   --bg: #0f172a;               /* Fondo general */
   --text: #e2e8f0;             /* Texto principal */
-  --primary: #22c55e;          /* Color principal (botones) */
+  --primary: #22c55e;          /* Color principal (botones/links) */
   --primary-text: #0b1220;     /* Texto sobre el botón principal */
 
   /* Estados/feedback */
@@ -121,7 +121,7 @@ input:focus{
 
 /* =========================================================
    6) Filas y ayudas (hint)
-   - Alinea botón + texto de ayuda y maneja responsividad simple.
+   - Alinea elementos tipo botón + texto y ayuda.
    ========================================================= */
 .row{
   display: flex;
@@ -140,8 +140,9 @@ input:focus{
 
 
 /* =========================================================
-   7) Botones (estilo base)
-   - Botón principal con sombra y estado disabled.
+   7) Botones (base + secundario)
+   - Base: botón principal
+   - Secundario: alternativa (Atrás, Volver, etc.)
    ========================================================= */
 button{
   padding: 12px 16px;
@@ -161,6 +162,13 @@ button:disabled{
   box-shadow: none;
 }
 
+.btn-secondary{
+  background: rgba(255,255,255,0.10);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: none;
+}
+
 
 /* =========================================================
    8) Mensajes (feedback ok / error)
@@ -177,16 +185,59 @@ button:disabled{
   display: none; /* por defecto oculto */
 }
 
-/* Mensaje “ok” */
 .msg.ok{
   display: block;
   border-color: var(--ok-border);
   background: var(--ok-bg);
 }
 
-/* Mensaje “error” */
 .msg.err{
   display: block;
   border-color: var(--err-border);
   background: var(--err-bg);
+}
+
+
+/* =========================================================
+   9) Utilidades comunes (reutilizables)
+   - Clases que se usan en varias páginas.
+   ========================================================= */
+.center{
+  text-align: center;
+}
+
+.actions{
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   10) Links globales
+   - Estilo coherente para hipervínculos en todo el sitio.
+   ========================================================= */
+a{
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   11) Caja/“panel” reutilizable
+   - Útil para secciones como “linkBox”, notas, etc.
+   ========================================================= */
+.box{
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
 }
