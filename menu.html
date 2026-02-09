@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menú</title>
 
-  <!-- Estilos globales compartidos -->
   <link rel="stylesheet" href="estilos.css">
 
   <style>
-    /* Ajustes específicos SOLO para menu.html */
     .center { text-align: center; }
 
     .menuGrid{
@@ -19,18 +17,11 @@
       grid-template-columns: 1fr;
     }
 
-    /* En pantallas medianas/grandes, 2 columnas */
     @media (min-width: 720px){
-      .menuGrid{
-        grid-template-columns: 1fr 1fr;
-      }
-      /* El tercer botón ocupa todo el ancho (opcional) */
-      .span2{
-        grid-column: 1 / -1;
-      }
+      .menuGrid{ grid-template-columns: 1fr 1fr; }
+      .span2{ grid-column: 1 / -1; }
     }
 
-    /* Botones tipo “tarjeta” para el menú */
     .menuBtn{
       width: 100%;
       padding: 16px 16px;
@@ -45,11 +36,10 @@
       font-weight: 500;
     }
 
-    /* Botón secundario */
-    .btn-secondary{
-      background: rgba(255,255,255,0.10);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.18);
+    /* Visual de “bloqueado” para p3 */
+    .locked{
+      opacity: 0.45;
+      cursor: not-allowed;
       box-shadow: none;
     }
 
@@ -66,7 +56,7 @@
 <body>
   <main class="card center">
     <h1>Menú</h1>
-    <p>Elige a dónde quieres ir. (Por ahora son páginas placeholder.)</p>
+    <p>Elige a dónde quieres ir.</p>
 
     <div class="menuGrid">
       <button class="menuBtn" id="btn1">
@@ -75,40 +65,60 @@
       </button>
 
       <button class="menuBtn" id="btn2">
-        Opción 2
+        Opción 2 (Quiz)
         <small>Ir a p2.html</small>
       </button>
 
       <button class="menuBtn span2" id="btn3">
         Opción 3
-        <small>Ir a p3.html</small>
+        <small id="p3Status">Bloqueado hasta completar el quiz</small>
       </button>
     </div>
 
-    <!-- Opcional: volver atrás -->
     <div class="actions">
       <button class="btn-secondary" id="btnVolver">Volver</button>
     </div>
   </main>
 
   <script>
-    // Navegación del menú
-    document.getElementById("btn1").addEventListener("click", () => {
-      window.location.href = "p1.html";
+    const FLAG = "quiz_p2_ok";
+
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    const btn3 = document.getElementById("btn3");
+    const p3Status = document.getElementById("p3Status");
+
+    btn1.addEventListener("click", () => window.location.href = "p1.html");
+    btn2.addEventListener("click", () => window.location.href = "p2.html");
+
+    function isP3Unlocked(){
+      return localStorage.getItem(FLAG) === "1";
+    }
+
+    function renderP3(){
+      if (isP3Unlocked()){
+        btn3.classList.remove("locked");
+        p3Status.textContent = "Disponible: ir a p3.html";
+      } else {
+        btn3.classList.add("locked");
+        p3Status.textContent = "Bloqueado hasta completar el quiz";
+      }
+    }
+
+    btn3.addEventListener("click", () => {
+      if (isP3Unlocked()){
+        window.location.href = "p3.html";
+      } else {
+        alert("Primero completa el quiz (Opción 2) para desbloquear esta sección.");
+      }
     });
 
-    document.getElementById("btn2").addEventListener("click", () => {
-      window.location.href = "p2.html";
-    });
-
-    document.getElementById("btn3").addEventListener("click", () => {
-      window.location.href = "p3.html";
-    });
-
-    // Botón opcional de volver a diaps
     document.getElementById("btnVolver").addEventListener("click", () => {
       window.location.href = "diaps.html";
     });
+
+    // Inicial (y por si vuelves al menú después del quiz)
+    renderP3();
   </script>
 </body>
 </html>
