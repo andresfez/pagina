@@ -98,7 +98,7 @@
     function renderP3(){
       if (isP3Unlocked()){
         btn3.classList.remove("locked");
-        p3Status.textContent = "Disponible: ir a video.html";
+        p3Status.textContent = "Disponible: ir a la tercera página";
       } else {
         btn3.classList.add("locked");
         p3Status.textContent = "Bloqueado hasta completar el quiz";
@@ -109,7 +109,7 @@
       if (isP3Unlocked()){
         window.location.href = "video.html";
       } else {
-        alert("Primero completa el quiz (Opción 2) para desbloquear esta sección.");
+        alert("Primero completa el quiz para desbloquear esta sección.");
       }
     });
 
