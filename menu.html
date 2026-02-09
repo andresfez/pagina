@@ -61,12 +61,12 @@
     <div class="menuGrid">
       <button class="menuBtn" id="btn1">
         Opción 1
-        <small>Ir a p1.html</small>
+        <small>Ir a la primera página</small>
       </button>
 
       <button class="menuBtn" id="btn2">
-        Opción 2 (Quiz)
-        <small>Ir a p2.html</small>
+        Opción 2
+        <small>Ir al quiz</small>
       </button>
 
       <button class="menuBtn span2" id="btn3">
@@ -88,8 +88,8 @@
     const btn3 = document.getElementById("btn3");
     const p3Status = document.getElementById("p3Status");
 
-    btn1.addEventListener("click", () => window.location.href = "p1.html");
-    btn2.addEventListener("click", () => window.location.href = "p2.html");
+    btn1.addEventListener("click", () => window.location.href = "playlist.html");
+    btn2.addEventListener("click", () => window.location.href = "quiz.html");
 
     function isP3Unlocked(){
       return localStorage.getItem(FLAG) === "1";
@@ -98,7 +98,7 @@
     function renderP3(){
       if (isP3Unlocked()){
         btn3.classList.remove("locked");
-        p3Status.textContent = "Disponible: ir a p3.html";
+        p3Status.textContent = "Disponible: ir a video.html";
       } else {
         btn3.classList.add("locked");
         p3Status.textContent = "Bloqueado hasta completar el quiz";
@@ -107,7 +107,7 @@
 
     btn3.addEventListener("click", () => {
       if (isP3Unlocked()){
-        window.location.href = "p3.html";
+        window.location.href = "video.html";
       } else {
         alert("Primero completa el quiz (Opción 2) para desbloquear esta sección.");
       }
