@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página 1</title>
+
+  <link rel="stylesheet" href="estilos.css">
+
+  <style>
+    /* Solo lo específico de p1 (tamaño del texto principal) */
+    .content{
+      margin-top: 10px;
+      font-size: clamp(17px, 2.2vw, 20px);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card center">
+    <h1>Página 1</h1>
+
+    <p class="content">
+      Acá va el texto principal de la página 1.
+      Este texto puede ser explicativo, descriptivo o introductorio.
+    </p>
+
+    <div class="box">
+      <p>
+        Acá va el hipervínculo:
+        <br>
+        <a href="https://www.google.com" target="_blank" rel="noopener">
+          Ir a Google
+        </a>
+      </p>
+    </div>
+
+    <div class="actions">
+      <button class="btn-secondary" id="btnMenu">Volver al menú</button>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("btnMenu").addEventListener("click", () => {
+      window.location.href = "menu.html";
+    });
+  </script>
+</body>
+</html>
