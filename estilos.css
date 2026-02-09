@@ -10,10 +10,10 @@
    ========================================================= */
 :root{
   /* Colores principales */
-  --bg: #0f172a;               /* Fondo general */
+  --bg: #8b3956;               /* Fondo general */
   --text: #e2e8f0;             /* Texto principal */
-  --primary: #22c55e;          /* Color principal (botones/links) */
-  --primary-text: #0b1220;     /* Texto sobre el botón principal */
+  --primary: #a03472;          /* Color principal (botones/links) */
+  --primary-text: #190916;     /* Texto sobre el botón principal */
 
   /* Estados/feedback */
   --ok-border: rgba(34,197,94,0.35);
