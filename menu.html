@@ -62,12 +62,6 @@
         <small>Ir al quiz</small>
       </button>
 
-      <button class="menuBtn span2" id="btn3">
-        Opción 3
-        <small id="p3Status">Bloqueado hasta completar el quiz</small>
-      </button>
-    </div>
-
     <div class="actions">
       <button class="btn-secondary" id="btnVolver">Volver</button>
     </div>
@@ -78,43 +72,14 @@
 
     const btn1 = document.getElementById("btn1");
     const btn2 = document.getElementById("btn2");
-    const btn3 = document.getElementById("btn3");
-    const p3Status = document.getElementById("p3Status");
 
     btn1.addEventListener("click", () => window.location.href = "playlist.html");
     btn2.addEventListener("click", () => window.location.href = "quiz.html");
 
-    function isP3Unlocked(){
-      return localStorage.getItem(FLAG) === "1";
-    }
-
-    function renderP3(){
-      const unlocked = isP3Unlocked();
-    
-      if (unlocked){
-        btn3.classList.remove("locked");
-        btn3.disabled = false;
-        p3Status.textContent = "Disponible: ir a la tercera página";
-      } else {
-        btn3.classList.add("locked");
-        btn3.disabled = true;
-        p3Status.textContent = "Bloqueado hasta completar el quiz";
-      }
-    }
-    
-    btn3.addEventListener("click", () => {
-      if (isP3Unlocked()){
-        window.location.href = "video.html";
-      } else {
-        alert("Primero completa el quiz para desbloquear esta sección.");
-      }
-    });
 
     document.getElementById("btnVolver").addEventListener("click", () => {
       window.location.href = "diaps.html";
     });
-
-    renderP3();
   </script>
 </body>
 </html>
