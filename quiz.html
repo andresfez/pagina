@@ -90,7 +90,7 @@
         title: "Pregunta 4",
         text: "La verdad no tengo más imaginación para pensar en más preguntas so; originalmente la playlist fue creada con el fin de «mostrar la esencia del autor en una playlist musical», (efectivamente fue en Sptify porque creo que no usas Apple Music) asimismo se redujo de +400 canciones a las que quedaron. ¿Qué opina de que hayan tantos artistas y tanta diversidad? .",
         options: ["Que diversidad, eso es una excusa por indesición", "Gracias por mostrar un pedazo de los gustos musicales tuyos (autor)", "¿Por qué tanto gringo?", "A la próxima hagamos una playlist colaborativa, sea en Spotify o en Apple Music"],
-        correctIndex: 0,1,2,3
+        correctIndex: [0,1,2,3]
       },
       {
         title: "Pregunta 5",
@@ -140,32 +140,34 @@
 
     function handleAnswer(chosenIndex){
       const q = quiz[i];
-
-      if (chosenIndex === q.correctIndex){
+    
+      const esCorrecto =
+        (typeof q.correctIndex === "number" && chosenIndex === q.correctIndex) ||
+        (Array.isArray(q.correctIndices) && q.correctIndices.includes(chosenIndex));
+    
+      if (esCorrecto){
         showMsg("ok", "Correcto.");
-
-        // Avanza a la siguiente pregunta (con pequeño delay para que se vea el feedback)
+    
         setTimeout(() => {
           i++;
           if (i >= quiz.length){
-            // Completó todo: desbloquear p3 y volver al menú
             localStorage.setItem(FLAG, "1");
             window.location.href = "menu.html";
           } else {
             renderQuestion();
           }
         }, 450);
-
+    
       } else {
         showMsg("err", "Incorrecto. Vuelve a la pregunta 1.");
-
-        // Regresa a pregunta 1
+    
         setTimeout(() => {
           i = 0;
           renderQuestion();
         }, 650);
       }
     }
+
 
     document.getElementById("btnMenu").addEventListener("click", () => {
       window.location.href = "menu.html";
