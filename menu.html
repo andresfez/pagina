@@ -89,15 +89,19 @@
     }
 
     function renderP3(){
-      if (isP3Unlocked()){
+      const unlocked = isP3Unlocked();
+    
+      if (unlocked){
         btn3.classList.remove("locked");
+        btn3.disabled = false;
         p3Status.textContent = "Disponible: ir a la tercera página";
       } else {
         btn3.classList.add("locked");
+        btn3.disabled = true;
         p3Status.textContent = "Bloqueado hasta completar el quiz";
       }
     }
-
+    
     btn3.addEventListener("click", () => {
       if (isP3Unlocked()){
         window.location.href = "video.html";
