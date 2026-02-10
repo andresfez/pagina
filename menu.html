@@ -9,40 +9,33 @@
 
   <style>
     .center { text-align: center; }
-
     .menuGrid{
       margin-top: 18px;
       display: grid;
       gap: 12px;
       grid-template-columns: 1fr;
     }
-
     @media (min-width: 720px){
       .menuGrid{ grid-template-columns: 1fr 1fr; }
       .span2{ grid-column: 1 / -1; }
     }
-
     .menuBtn{
       width: 100%;
       padding: 16px 16px;
       text-align: left;
       border-radius: var(--radius-card);
     }
-
     .menuBtn small{
       display: block;
       margin-top: 6px;
       opacity: 0.8;
       font-weight: 500;
     }
-
-    /* Visual de “bloqueado” para p3 */
     .locked{
       opacity: 0.45;
       cursor: not-allowed;
       box-shadow: none;
     }
-
     .actions{
       margin-top: 18px;
       display: flex;
@@ -56,7 +49,7 @@
 <body>
   <main class="card center">
     <h1>Menú</h1>
-    <p>Elige a dónde quieres ir.</p>
+    <p>Seleccione una opción.</p>
 
     <div class="menuGrid">
       <button class="menuBtn" id="btn1">
@@ -117,7 +110,6 @@
       window.location.href = "diaps.html";
     });
 
-    // Inicial (y por si vuelves al menú después del quiz)
     renderP3();
   </script>
 </body>
