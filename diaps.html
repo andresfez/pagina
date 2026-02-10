@@ -4,20 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diapositivas</title>
-
-  <!-- Estilos globales compartidos -->
   <link rel="stylesheet" href="estilos.css">
-
   <style>
-    /* Ajustes específicos SOLO para diaps.html (mínimos) */
-    .center { text-align: center; }
+    .center {text-align: center;}
     .bigText{
       font-size: clamp(18px, 2.2vw, 22px);
       line-height: 1.55;
       margin-top: 6px;
     }
-
-    /* Botón secundario (Atrás) para que no sea igual al principal */
     .btn-secondary{
       background: rgba(255,255,255,0.10);
       color: var(--text);
@@ -27,8 +21,6 @@
     .btn-secondary:hover{
       filter: brightness(1.05);
     }
-
-    /* Contenedor de botones más ordenado */
     .actions{
       margin-top: 18px;
       display: flex;
@@ -43,33 +35,26 @@
   <main class="card center">
     <h1 id="titulo">Introducción</h1>
 
-    <!-- Aquí se inyectan los textos (1 a 5) -->
     <p class="bigText" id="textoActual"></p>
 
-    <!-- Acciones -->
     <div class="actions">
       <button id="btnAtras" class="btn-secondary" style="display:none;">Atrás</button>
       <button id="btnSiguiente">Siguiente</button>
     </div>
 
-    <!-- Indicador opcional (puedes borrarlo si no lo quieres) -->
     <p class="hint" id="indicador" style="margin-top:14px;"></p>
   </main>
 
   <script>
-    // =========================================================
-    // 5 textos (placeholders)
-    // Reemplaza cada string por tu texto real cuando quieras
-    // =========================================================
+
     const textos = [
-      "Acá va el texto 1 (texto de gracias).",
-      "Acá va el texto 2 (texto de explicación).",
-      "Acá va el texto 3 (texto complementario 1).",
-      "Acá va el texto 4 (texto complementario 2).",
-      "Acá va el texto 5 (texto final para continuar a menú)."
+      "Gracias por tomarse el tiempo de leer las siguientes indicaciones.",
+      "A continuación se le presentarán textos con indicaciones para proseguir, por favor prestar atención en los detalles innecesarios.",
+      "En su momento aparecerá un menú con tres opciones, por vacor elejir la opción 1 como opcion primaria.",
+      "Luego, se presentará un quiz con 5 preguntas de selección múltipe, sin límite de intentos.",
+      "Nuevamente, gracias por su tiempo y disposición. Pasaremos al menú"
     ];
 
-    // Índice actual (0 = texto 1)
     let i = 0;
 
     const textoActual = document.getElementById("textoActual");
@@ -78,43 +63,29 @@
     const indicador = document.getElementById("indicador");
 
     function render() {
-      // 1) Mostrar texto
+
       textoActual.textContent = textos[i];
-
-      // 2) Mostrar/ocultar botón Atrás:
-      //    - Solo aparece desde el texto 2 (i >= 1)
       btnAtras.style.display = (i >= 1) ? "inline-block" : "none";
-
-      // 3) Cambiar el botón principal en el texto final:
-      //    - Si i == 4 (texto 5), el botón dice "Ir al menú"
       const esFinal = (i === textos.length - 1);
       btnSiguiente.textContent = esFinal ? "Ir al menú" : "Siguiente";
-
-      // 4) Indicador (opcional)
       indicador.textContent = `Texto ${i + 1} de ${textos.length}`;
     }
 
-    // Click Atrás: retrocede 1 (sin bajar de 0)
     btnAtras.addEventListener("click", () => {
       i = Math.max(0, i - 1);
       render();
     });
 
-    // Click Siguiente / Ir al menú:
     btnSiguiente.addEventListener("click", () => {
       const esFinal = (i === textos.length - 1);
-
       if (esFinal) {
-        // Ir al menú
         window.location.href = "menu.html";
       } else {
-        // Avanzar 1
         i = Math.min(textos.length - 1, i + 1);
         render();
       }
     });
 
-    // Soporte teclado: flechas y Enter
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
         if (i >= 1) {
@@ -133,7 +104,6 @@
       }
     });
 
-    // Inicial
     render();
   </script>
 </body>
