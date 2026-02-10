@@ -61,7 +61,7 @@
     <div id="msgBox" class="msg"></div>
 
     <div class="topActions">
-      <button class="btn-secondary" id="btnMenu">Volver al menú</button>
+      <button class="btn-secondary" id="btnMenu">Siguiente</button>
     </div>
   </main>
 
@@ -152,7 +152,7 @@
           i++;
           if (i >= quiz.length){
             localStorage.setItem(FLAG, "1");
-            window.location.href = "menu.html";
+            window.location.href = "video.html";
           } else {
             renderQuestion();
           }
@@ -170,7 +170,7 @@
 
 
     document.getElementById("btnMenu").addEventListener("click", () => {
-      window.location.href = "menu.html";
+      window.location.href = "video.html";
     });
 
     // Inicial
