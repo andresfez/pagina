@@ -6,14 +6,12 @@
   <title>Quiz (P2)</title>
 
   <link rel="stylesheet" href="estilos.css">
-
   <style>
     .question{
       margin-top: 10px;
       font-size: clamp(17px, 2.2vw, 20px);
       line-height: 1.6;
     }
-
     .options{
       margin-top: 18px;
       display: grid;
@@ -21,23 +19,18 @@
       grid-template-columns: 1fr;
       text-align: left;
     }
-
     @media (min-width: 720px){
       .options{ grid-template-columns: 1fr 1fr; }
     }
-
-    /* Botones de respuesta estilo “tarjeta” */
     .optBtn{
       width: 100%;
       padding: 14px 14px;
       border-radius: var(--radius-card);
       text-align: left;
     }
-
     .meta{
       margin-top: 14px;
     }
-
     .topActions{
       margin-top: 16px;
       display: flex;
@@ -52,26 +45,21 @@
   <main class="card center">
     <h1>Quiz</h1>
 
-    <!-- Texto introductorio del quiz -->
     <p class="question" id="intro">
-      Acá va el texto que explica que esto es un quiz.
-      Instrucción: selecciona la opción correcta. Si fallas, vuelves a la pregunta 1.
+      A continuación presentará un quiz de cinco preguntas de selección múltiple.
+      Instrucción: selecciona la opción correcta. Al fallar, vuelve a la pregunta 1.
     </p>
 
-    <!-- Pregunta actual -->
     <div class="box" style="margin-top:16px;">
       <p id="qTitle" style="margin:0 0 8px; font-weight:700; opacity:1;"></p>
       <p id="qText" class="question" style="margin:0;"></p>
     </div>
 
-    <!-- Opciones -->
     <div class="options" id="options"></div>
 
-    <!-- Indicador y mensajes -->
     <p class="hint meta" id="progress"></p>
     <div id="msgBox" class="msg"></div>
 
-    <!-- Volver al menú (sin desbloquear) -->
     <div class="topActions">
       <button class="btn-secondary" id="btnMenu">Volver al menú</button>
     </div>
@@ -79,41 +67,36 @@
 
   <script>
     const FLAG = "quiz_p2_ok";
-
-    // =========================================================
-    // Banco de preguntas (placeholders)
-    // - correctIndex: 0..3 indica cuál opción es la correcta
-    // =========================================================
     const quiz = [
       {
         title: "Pregunta 1",
-        text: "Acá va el enunciado de la pregunta 1.",
+        text: "¿Cuántas canciones tiene la playlist mostrada tras seleccionar la opción 1 en el menú?.",
         options: ["Opción A", "Opción B", "Opción C", "Opción D"],
         correctIndex: 0
       },
       {
         title: "Pregunta 2",
-        text: "Acá va el enunciado de la pregunta 2.",
-        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        text: "¿Cuantos cambios de texto hubieron en la segunda página? (página entre registro y menú)",
+        options: ["4", "5", "6", "No cuenta porque los «cambios de texto» implican un cambio de página, mas no un cambio de contenido de la pagina, manteniendo la misma página."],
         correctIndex: 1
       },
       {
         title: "Pregunta 3",
-        text: "Acá va el enunciado de la pregunta 3.",
-        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
+        text: "En una temporada previa ¿Por qué el autor dedicó DtMf?",
+        options: ["Al autor le gustó el beat", "Por parlón", "Porque genuinamente sintió eso en el momento que pasó, y quería expresarlo mas no sabía como por lo que decidió dedicar una canción", "Bad Bunny es una chimba."],
         correctIndex: 2
       },
       {
         title: "Pregunta 4",
-        text: "Acá va el enunciado de la pregunta 4.",
-        options: ["Opción A", "Opción B", "Opción C", "Opción D"],
-        correctIndex: 3
+        text: "La verdad no tengo más imaginación para pensar en más preguntas so; originalmente la playlist fue creada con el fin de «mostrar la esencia del autor en una playlist musical», (efectivamente fue en Sptify porque creo que no usas Apple Music) asimismo se redujo de +400 canciones a las que quedaron. ¿Qué opina de que hayan tantos artistas y tanta diversidad? .",
+        options: ["Que diversidad, eso es una excusa por indesición", "Gracias por mostrar un pedazo de los gustos musicales tuyos (autor)", "¿Por qué tanto gringo?", "A la próxima hagamos una playlist colaborativa, sea en Spotify o en Apple Music"],
+        correctIndex: 0,1,2,3
       },
       {
         title: "Pregunta 5",
-        text: "Acá va el enunciado de la pregunta 5.",
+        text: "¿Qué tal el intento de una actividad diferente, «aprovechando» la distancia?",
         options: ["Opción A", "Opción B", "Opción C", "Opción D"],
-        correctIndex: 0
+        correctIndex: 3
       }
     ];
 
@@ -159,7 +142,7 @@
       const q = quiz[i];
 
       if (chosenIndex === q.correctIndex){
-        showMsg("ok", "✅ Correcto.");
+        showMsg("ok", "Correcto.");
 
         // Avanza a la siguiente pregunta (con pequeño delay para que se vea el feedback)
         setTimeout(() => {
@@ -174,7 +157,7 @@
         }, 450);
 
       } else {
-        showMsg("err", "❌ Incorrecto. Vuelves a la pregunta 1.");
+        showMsg("err", "Incorrecto. Vuelve a la pregunta 1.");
 
         // Regresa a pregunta 1
         setTimeout(() => {
